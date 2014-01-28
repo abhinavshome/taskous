@@ -1,2 +1,0 @@
-# taskous
-### a Sails application

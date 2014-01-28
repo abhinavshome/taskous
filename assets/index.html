@@ -1,23 +1,27 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width">
-        <link href="/css/lib/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="/css/lib/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
+<html ng-app>
+<head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="/css/lib/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/lib/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <div class="container" ng-controller="SimpleController">
+    <input type="text" ng-model="searchText"/>    
+        <ul>
+            <li ng-repeat="cust in customers | filter: searchText | orderBy: 'name'">{{cust.name}} - {{cust.city}}</li>
+        </ul>
+   </div>
 
-        <!-- Javascript files here -->
-        <script src="https://code.jquery.com/jquery.js"></script>
-        <script type="text/javascript" src="/js/lib/bootstrap.js"></script>
-        <script type="text/javascript" src="/js/app.js"></script>
-    </body>
+   <!-- Javascript library files here -->
+   <script src="https://code.jquery.com/jquery.js"></script>
+   <script type="text/javascript" src="/js/lib/bootstrap.js"></script>
+   <script type="text/javascript" src="/js/lib/angular.min.js"></script>
+   <script type="text/javascript" src="/js/app.js"></script>
+
+   <!-- Own Javascript files -->
+   <script type="text/javascript" src="/js/app/controllers/SimpleController.js"></script>
+</body>
 </html>

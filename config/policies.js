@@ -12,15 +12,17 @@
  */
 
 
-module.exports.policies = {
+ module.exports.policies = {
 
   // Default policy for all controllers and actions
   // (`true` allows public access) 
   '*': true,
   
   ProjectController: {
-      '*': false,
-      'tasks': ['isAuthenticated', 'belongsToCurrentUser']
+  	'*': ['isAuthenticated', 'projectBelongsToCurrentUser']
+  },
+  TaskController: {
+  	'*': ['isAuthenticated', 'hasProjectId', 'taskBelongsToCurrentUser']
   }
   /*
 	// Here's an example of adding some policies to a controller

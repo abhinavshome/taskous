@@ -15,14 +15,38 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
-module.exports = {
+ module.exports = {
 
-    tasks : function(req, res) {
-        Task.findByProjectId(req.id).done(function (err, tasks) {
-          if(err){
-              res.send('DB error', 500);
-          }
-          res.send(tasks);
-        });
-    }
-};
+ 	find : function(req, res) {
+ 		console.log('find called', req.params.id);
+ 		if(req.params.id){
+ 			Project.findOne(req.params.id).done(function(err, project){
+ 				if (err) res.send('DB error', 500);
+ 				res.json(project);
+ 			});
+ 		} else {
+ 			Team
+ 			.find({userId: req.session.user})
+ 			.done(function(err, teams){
+ 				res.json(teams);
+ 			});
+ 		}
+ 	},
+ 	create: function  (req, res) {
+ 		Project
+ 		.create(req.body)
+ 		.done(function (err, project) {
+ 			if(err) res.send('DB error', 500);
+ 			console.log('project created', project);
+ 			Team
+ 			.create({
+ 				projectId: project.id,
+ 				userId: req.session.user
+ 			})
+ 			.done(function (err, team) {
+ 				if(err) res.send('DB error', 500);
+ 				res.send(project);
+ 			});
+ 		})
+ 	}
+ };

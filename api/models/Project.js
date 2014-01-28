@@ -11,15 +11,7 @@ module.exports = {
     attributes : {
         deadline : 'date',
         status : 'string',
-        desc : 'string',
-        getTasks : function() {
-            return Task.findByProjectId(this.id);
-        },
-        checkUserAuthorization : function(userId) {
-            Team.find({userId: userId, projectId: this.id}).done(function(err, team){
-                
-            });
-        }
+        desc : 'string'
     }
 
 };

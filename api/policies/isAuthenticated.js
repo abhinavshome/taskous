@@ -8,7 +8,9 @@
  *
  */
 module.exports = function(req, res, next) {
-    console.log('1 called');
+    if(!req.session.user)
+       return res.send('Please login first', 403);
+
 
   // User is allowed, proceed to the next policy, 
   // or if this is the last policy, the controller
