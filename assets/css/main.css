@@ -1,0 +1,26 @@
+body{
+    background-color: #cedcdc;
+    font-family: "Open Sans", "Lucida Grande", "Lucida Sans Unicode";
+    font-size: 13px;
+}
+input, button, select, textarea{
+    font-family: "Open Sans", "Lucida Grande", "Lucida Sans Unicode";
+    font-size: 13px;
+}
+.whiteBg{
+    background-color: #fff;
+}
+.p20{
+    padding: 20px;
+}
+.mb0{
+    margin-bottom: 0;
+}
+
+/**** overriding bootstrap defaults *****/
+.nav-tabs>.active>a, .nav-tabs>.active>a:hover, .nav-tabs>.active>a:focus{
+    background-color: #065887;
+    color: #fff;
+    border: none;
+}
+

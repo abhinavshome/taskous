@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="span6 offset2">
+                <ul class="nav nav-tabs mb0">
+                <li class="active">
+                    <a href="#">Tasks</a>
+                </li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Team</a></li>
+            </ul>
+
+        <div class="whiteBg p20">
+            
+            <form class="form-inline">
+                <input type="text" placeholder="Create a task"/>
+                <button class="btn" ng-click="createTask()">Create</button>
+            </form>
+            <div ng-repeat="user in users">{{user.username}}</div>
+        </div>
+    </div>
+</div>

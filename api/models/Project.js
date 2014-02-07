@@ -9,6 +9,7 @@
 module.exports = {
 
     attributes : {
+        title: 'string',
         deadline : 'date',
         status : 'string',
         desc : 'string'

@@ -47,6 +47,6 @@
  				if(err) res.send('DB error', 500);
  				res.send(project);
  			});
- 		})
+ 		});
  	}
  };

@@ -29,6 +29,9 @@ module.exports = {
             delete obj.password;
             return obj;
         },
+        projects: function(){
+            
+        }
         // validPassword: function(password, callback) {
         // var obj = this.toObject();
         // if (callback) {
