@@ -11,10 +11,10 @@
         <div class="whiteBg p20">
             
             <form class="form-inline">
-                <input type="text" placeholder="Create a task"/>
+                <input type="text" placeholder="Create a task" ng-model="taskString"/>
                 <button class="btn" ng-click="createTask()">Create</button>
             </form>
-            <div ng-repeat="user in users">{{user.username}}</div>
+            <div ng-repeat="task in tasks">#{{task.id}} {{task.desc}} <a ng-click="deleteTask(task)"><i class="icon-trash"></i></a> </div>
         </div>
     </div>
 </div>

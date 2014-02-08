@@ -36,7 +36,8 @@ module.exports.routes = {
   'post /login': {controller: 'user', action: 'login'},
   'get /logout': {controller: 'user', action: 'logout'},
   'get /project/:projectId/task/:id?': {controller: 'task', action: 'find'},
-  'post /project/:projectId/task': {controller: 'task', action: 'create'}
+  'post /project/:projectId/task': {controller: 'task', action: 'create'},
+  'delete /project/:projectId/task/:id?': {controller: 'task', action: 'destroy'}
 
 
   /*

@@ -7,27 +7,34 @@
  * @docs        :: http://sailsjs.org/#!documentation/policies
  *
  */
- module.exports = function(req, res, next) {
+module.exports = function(req, res, next) {
     console.log('2 called', req, req.id);
 
-    var taskId = req.params.id, projectId = req.params.projectId, userId = req.session.user;
+    var taskId = req.params.id,
+        projectId = req.params.projectId,
+        userId = req.session.user;
 
-    
-    Team.find({userId: userId, projectId: projectId}).done(function(err, teams){
+    if (!taskId)
+        return next();
+
+    Team.find({
+        userId: userId,
+        projectId: projectId
+    }).done(function(err, teams) {
         console.log('errors', err, teams);
-        if(err) return res.send('DB error', 500);
-        
-        if(teams.length == 0) return res.send('Not your project', 403);
-        
+        if (err) return res.send('DB error', 500);
+
+        if (teams.length == 0) return res.send('Not your project', 403);
+
         Task.find({
             id: taskId,
             projectId: projectId
-        }).done(function (err, tasks) {
-            if(err) return res.send('DB error', 500);
+        }).done(function(err, tasks) {
+            if (err) return res.send('DB error', 500);
             console.log(tasks);
-            if(tasks.length == 0) return res.send('You can\'t access this task', 403);
+            if (tasks.length == 0) return res.send('You can\'t access this task', 403);
         })
-        
+
         return next();
     });
 };

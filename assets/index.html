@@ -4,11 +4,11 @@
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        <link href="/css/lib/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="/css/main.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div class="navbar navbar-static-top navbar-inverse" style="margin: -1px -1px 0;" ng-controller="topMenuController">
+        <div class="navbar navbar-static-top navbar-inverse" style="margin: -1px -1px 0;" ng-controller="TopMenuController">
             <div class="navbar-inner">
                 <div class="container" style="width: auto; padding: 0 20px;">
                     <a class="brand" href="#">taskous</a>
@@ -16,16 +16,14 @@
                         <li class="active"><a href="#">Home</a></li>
                         <li><a href="#">Link</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Account
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                {{currentProject.title}}
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li ng-repeat="project in projects"><a tabindex="-1" href="#">{{project.title}}</a></li>
-                                <li><a tabindex="-1" href="#">Another action</a></li>
-                                <li><a tabindex="-1" href="#">Something else here</a></li>
+                                <li ng-repeat="project in projects"><a tabindex="-1" ng-click="selectProject(project)" >{{project.title}}</a></li>
                                 <li class="divider"></li>
-                                <li><a tabindex="-1" href="#">Separated link</a></li>
+                                <li><a tabindex="-1" href="#">Create New</a></li>
                             </ul>
                         </li>
                     </ul>

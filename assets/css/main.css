@@ -1,6 +1,6 @@
 body{
     background-color: #cedcdc;
-    font-family: "Open Sans", "Lucida Grande", "Lucida Sans Unicode";
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Open Sans";
     font-size: 13px;
 }
 input, button, select, textarea{
@@ -15,6 +15,9 @@ input, button, select, textarea{
 }
 .mb0{
     margin-bottom: 0;
+}
+a{
+    cursor: pointer;
 }
 
 /**** overriding bootstrap defaults *****/

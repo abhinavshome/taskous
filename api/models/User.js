@@ -28,9 +28,6 @@ module.exports = {
             var obj = this.toObject();
             delete obj.password;
             return obj;
-        },
-        projects: function(){
-            
         }
         // validPassword: function(password, callback) {
         // var obj = this.toObject();
@@ -55,5 +52,9 @@ module.exports = {
                 next();
             });
         });
+    },
+
+    getAllProjectsSQLQuery: function (userId) {
+        return 'SELECT project.* FROM project JOIN team ON project.id = team.projectId where team.userId=' + userId;
     }
 }; 
