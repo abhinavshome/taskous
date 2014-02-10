@@ -1,20 +1,65 @@
 <div class="row">
-    <div class="span6 offset2">
-                <ul class="nav nav-tabs mb0">
-                <li class="active">
-                    <a href="#">Tasks</a>
-                </li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Team</a></li>
-            </ul>
+    <div class="span7">
+        <ul class="nav nav-tabs mb0">
+            <li class="active">
+                <a href="#">Tasks</a>
+            </li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Team</a></li>
+        </ul>
 
         <div class="whiteBg p20">
-            
+
             <form class="form-inline">
-                <input type="text" placeholder="Create a task" ng-model="taskString"/>
-                <button class="btn" ng-click="createTask()">Create</button>
+                <textarea type="text" placeholder="Create a task" ng-model="taskString"
+                          class="input-block-level"></textarea>
+                <button class="btn btn-info btn-small pull-right" ng-click="createTask()">Create</button>
             </form>
-            <div ng-repeat="task in tasks">#{{task.id}} {{task.desc}} <a ng-click="deleteTask(task)"><i class="icon-trash"></i></a> </div>
+            <div ng-repeat="task in tasks"><span class="badge">#{{task.id}}</span> {{task.desc}} <a
+                    ng-click="deleteTask(task)"><i class="icon-trash"></i></a></div>
+        </div>
+    </div>
+    <div class="span4 offset1">
+        <ul class="nav nav-tabs mb0">
+            <li class="active">
+                <a href="#">Team</a>
+            </li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Team</a></li>
+        </ul>
+        <div class="whiteBg p20">
+            <div class="project">
+                <h4>{{ currentProject.title }}</h4>
+
+                <p>{{ currentProject.desc }}</p>
+            </div>
+            <ul class="nav nav-list">
+
+                <li class="divider"></li>
+
+            </ul>
+            <div class="team" ng-controller="TeamController">
+                <h4>Team</h4>
+                <ul>
+                    <li ng-repeat="user in team">{{ user }}</li>
+                </ul>
+                <div class="input-append">
+                    <input class="" id="appendedInput" type="text" placeholder="Add user in team">
+                    <span class="add-on"><a ng-click="addUser(user)"><i class="icon-plus"></i></a></span>
+
+                </div>
+                <div class="dropdown">
+                    <!-- Link or button to toggle dropdown -->
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <li><a tabindex="-1" href="#">Action</a></li>
+                        <li><a tabindex="-1" href="#">Another action</a></li>
+                        <li><a tabindex="-1" href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a tabindex="-1" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

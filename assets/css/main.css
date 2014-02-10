@@ -16,6 +16,12 @@ input, button, select, textarea{
 .mb0{
     margin-bottom: 0;
 }
+.h50{
+    height: 50px;
+}
+.pt10{
+    padding-top: 10px;
+}
 a{
     cursor: pointer;
 }

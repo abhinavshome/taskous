@@ -2,7 +2,7 @@
  * TeamController
  *
  * @module      :: Controller
- * @description	:: A set of functions called `actions`.
+ * @description    :: A set of functions called `actions`.
  *
  *                 Actions contain code telling Sails how to respond to a certain type of request.
  *                 (i.e. do stuff, then send some JSON, show an HTML page, or redirect to another URL)
@@ -16,56 +16,41 @@
  */
 
 module.exports = {
-    login: function(req, res) {
-        var bcrypt = require('bcrypt-nodejs');
+    find: function (req, res) {
+        if (req.params.id) {
 
-        Team.findOneByHandle(req.body.handle, function(err, team) {
-            if (err)
-                res.json({error: 'DB error'}, 500);
-
-            if (team) {
-                bcrypt.compare(req.body.password, team.password, function(err, match) {
-                    if (err)
-                        res.json({error: 'Server error'}, 500);
-
-                    if (match) {
-                        // password match
-                        req.session.team = team.id;
+        } else {
+            Team
+                .query(Team.getTeamSQLQuery(req.params.projectId), function (err, users) {
+                    if (err) res.send('DB error', 500);
+                    res.json(users);
+                });
+        }
+    },
+    create: function (req, res) {
+        User
+            .findOne({
+                username: req.body.username
+            })
+            .done(function (err, user) {
+                if (err) {
+                    res.send('DB error', 500);
+                    return;
+                }
+                if (typeof user === 'undefined') {
+                    res.send('User not found', 404);
+                    return;
+                }
+                console.log('user', user);
+                Team
+                    .create({
+                        userId: user.id,
+                        projectId: req.params.projectId
+                    })
+                    .done(function (err, team) {
+                        if (err) res.send('DB error', 500);
                         res.json(team);
-                    } else {
-                        // invalid password
-                        if (req.session.team)
-                            req.session.team = null;
-                        res.json({error: 'Invalid password'}, 400);
-                    }
-                });
-            } else {
-                res.json({error: 'Team not found'}, 404);
-            }
-        });
-    },
-    logout: function(req, res) {
-        req.session.team = null;
-        res.send("Successfully logged out");
-    },
-    users: function(req, res) {
-        Team.findOne(req.session.team, function(err, team) {
-            if (err)
-                res.json({error: 'DB error'}, 500);
-            if (team) {
-                team.getUsers().done(function(err, users){
-                    console.log('users', users);
-                    if(err) 
-                        res.json({error: 'Server error'});
-                    if(users){
-                        res.json(users);
-                    } else {
-                        res.json({error: 'No users in this team'});
-                    }
-                });
-            } else {
-                res.json({error: 'Users not found'}, 404);
-            }
-        });
+                    });
+            })
     }
 };

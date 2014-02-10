@@ -33,17 +33,16 @@
         </div>
         <div class="container">
 
-            <div class="row">
-                <div class="span12">
-                    {{user}}
+            <div class="row" ng-controller="AlertController">
+                <div class="span12 h50 pt10">
+                    <div class="alert alert-{{ alert.type }}">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{ alert.message }}
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="span12">
-                    {{message}}
-                </div>
-            </div>
-            <div ng-view></div>             
+
+            <div ng-view></div>
         </div>
 
         <!-- Javascript library files here -->
