@@ -41,11 +41,11 @@
             <div class="team" ng-controller="TeamController">
                 <h4>Team</h4>
                 <ul>
-                    <li ng-repeat="user in team">{{ user }}</li>
+                    <li ng-repeat="user in team">{{ user.username }}</li>
                 </ul>
                 <div class="input-append">
-                    <input class="" id="appendedInput" type="text" placeholder="Add user in team">
-                    <span class="add-on"><a ng-click="addUser(user)"><i class="icon-plus"></i></a></span>
+                    <input class="" id="appendedInput" type="text" placeholder="Add user in team" ng-model="newUser.username">
+                    <span class="add-on"><a ng-click="addUser()"><i class="icon-plus"></i></a></span>
 
                 </div>
                 <div class="dropdown">
