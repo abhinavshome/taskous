@@ -11,7 +11,8 @@ module.exports = {
   attributes: {
     reporterId	: 'integer',
     projectId	: 'integer',
-    desc: 'string'
+    desc: 'string',
+    assigneeId: 'integer'
   }
 
 };

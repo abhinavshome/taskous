@@ -1,60 +1,94 @@
 angular
-    .module('taskous.services', ["ngResource"])
-    .factory(
-    {
-        User: function ($resource) {
-            return $resource(
-                "/user:userId", {
-                    userId: "@id"
-                }, {
-                    "update": {
-                        method: "PUT"
+        .module('taskous.services', ["ngResource"])
+        .factory(
+                {
+                    User: function($resource) {
+                        return $resource(
+                                "/user:userId", {
+                                    userId: "@id"
+                                }, {
+                            "update": {
+                                method: "PUT"
+                            }
+                        }
+                        );
                     },
-                    "logIn": {
-                        method: 'POST'
+                    Task: function($resource) {
+                        return $resource(
+                                "/project/:projectId/task/:taskId", {
+                                    projectId: '@projectId',
+                                    taskId: '@id'
+                                }, {}
+                        );
+                    },
+                    Team: function($resource) {
+                        return $resource(
+                                "/project/:projectId/team/:teamId", {
+                                    projectId: '@projectId',
+                                    teamId: '@id'
+                                }, {}
+                        );
+                    },
+                    Project: function($resource) {
+                        return $resource(
+                                "/project/:projectId", {
+                                    projectId: '@id'
+                                }, {}
+                        );
+                    },
+                    AppData: function() {
+                        var data = {};
+                        return {
+                            get: function(key) {
+                                return data[key];
+                            },
+                            set: function(key, value) {
+                                data[key] = value;
+                            }
+                        };
+                    },
+                    Auth: function($http, $rootScope, $location) {
+                        var currentUser = null;
+                        return {
+                            logIn: function(user) {
+                                return $http.post('/login', user)
+                                        .success(function(user) {
+                                            $rootScope.message = 'User #' + user.username + 'logged in successfully!';
+                                            currentUser = user;
+                                            $location.path('/');
+                                        })
+                                        .error(function(err) {
+                                            $rootScope.message = err.error;
+                                            console.log(err);
+                                        });
+                                ;
+                            },
+                            logOut: function() {
+                                return $http.get('/logout');
+                            },
+                            isLoggedIn: function() {
+                                return currentUser !== null;
+                            },
+                            setCurrentUser: function(user) {
+                                currentUser = user;
+                            },
+                            getCurrentUser: function() {
+                                return currentUser;
+                            }
+                        }
+
+                    },
+                    Parser: function() {
+                        return {
+                            parse: function(taskString) {
+                                var components = taskString.split('@');
+                                return {
+                                    title: components[0].trim(),
+                                    assignee: components[1].trim()
+                                }
+                            }
+                        };
                     }
 
-                }
-            );
-        },
-
-        Task: function ($resource) {
-            return $resource(
-                "/project/:projectId/task/:taskId", {
-                    projectId: '@projectId',
-                    taskId: '@id'
-                }, {}
-            );
-        },
-
-        Team: function ($resource) {
-            return $resource(
-                "/project/:projectId/team/:teamId", {
-                    projectId: '@projectId',
-                    teamId: '@id'
-                }, {}
-            );
-        },
-
-        Project: function ($resource) {
-            return $resource(
-                "/project/:projectId", {
-                    projectId: '@id'
-                }, {}
-            );
-        },
-
-        AppData: function () {
-            var data = {};
-            return {
-                get: function (key) {
-                    return data[key];
-                },
-                set: function (key, value) {
-                    data[key] = value;
-                }
-            };
-        }
-
-    });
+                });
 
