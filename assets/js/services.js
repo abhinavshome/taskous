@@ -55,6 +55,7 @@ angular
                                         .success(function(user) {
                                             $rootScope.message = 'User #' + user.username + 'logged in successfully!';
                                             currentUser = user;
+                                            console.log('redirecting to /');
                                             $location.path('/');
                                         })
                                         .error(function(err) {

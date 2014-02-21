@@ -1,3 +1,6 @@
+
+
+
 angular.module("taskous", ['taskous.services', 'taskous.controllers', 'ngRoute'])
         .run(function($rootScope) {
             $rootScope.message = '';
@@ -6,6 +9,7 @@ angular.module("taskous", ['taskous.services', 'taskous.controllers', 'ngRoute']
         .run(['$rootScope', '$location', 'Auth', function($rootScope, $location, Auth) {
 
                 $rootScope.$on("$routeChangeStart", function(event, next, current) {
+                    console.log('route changed :: logged in? ', Auth.isLoggedIn() );
                     if (!Auth.isLoggedIn())
                         $location.path('/login');
                 });
