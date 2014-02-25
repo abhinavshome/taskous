@@ -1,19 +1,16 @@
-
-
-
 angular.module("taskous", ['taskous.services', 'taskous.controllers', 'ngRoute'])
         .run(function($rootScope) {
             $rootScope.message = '';
             $rootScope.user = '';
         })
-        .run(['$rootScope', '$location', 'Auth', function($rootScope, $location, Auth) {
+        // .run(['$rootScope', '$location', 'Auth', function($rootScope, $location, Auth) {
 
-                $rootScope.$on("$routeChangeStart", function(event, next, current) {
-                    console.log('route changed :: logged in? ', Auth.isLoggedIn() );
-                    if (!Auth.isLoggedIn())
-                        $location.path('/login');
-                });
-            }])
+        //         $rootScope.$on("$routeChangeStart", function(event, next, current) {
+        //             console.log('route changed :: logged in? ', Auth.isLoggedIn() );
+        //             if (!Auth.isLoggedIn())
+        //                 $location.path('/login');
+        //         });
+        //     }])
         .config(['$routeProvider', function($routeProvider) {
                 $routeProvider
                         .when('/', {

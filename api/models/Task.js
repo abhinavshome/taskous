@@ -13,6 +13,10 @@ module.exports = {
     projectId	: 'integer',
     desc: 'string',
     assigneeId: 'integer'
+  },
+
+  getAllTasksOfThisProjectQuery: function (projectId) {
+  	return "SELECT task.*,user.username FROM task JOIN user ON task.assigneeId = user.id" + projectId;
   }
 
 };

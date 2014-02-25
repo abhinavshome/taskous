@@ -15,8 +15,8 @@
                           class="input-block-level"></textarea>
                 <button class="btn btn-info btn-small pull-right" ng-click="createTask()">Create</button>
             </form>
-            <div ng-repeat="task in tasks"><span class="badge">#{{task.id}}</span> {{task.desc}} <a
-                    ng-click="deleteTask(task)"><i class="icon-trash"></i></a></div>
+            <div ng-repeat="task in tasks"><span class="badge">#{{task.id}}</span> {{task.desc}} 
+            <a ng-click="deleteTask(task)"><i class="icon-trash"></i></a></div>
         </div>
     </div>
     <div class="span4 offset1">

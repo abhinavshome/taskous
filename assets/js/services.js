@@ -75,6 +75,9 @@ angular
                             },
                             getCurrentUser: function() {
                                 return currentUser;
+                            },
+                            redirectBackIfNotLoggedIn: function () {
+                                
                             }
                         }
 

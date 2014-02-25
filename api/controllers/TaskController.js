@@ -6,13 +6,13 @@ module.exports = {
                 if (err)
                     res.send('DB error', 500);
                 res.json(task);
-            })
+            });
         } else {
-            Task.findByProjectId(req.params.projectId).done(function(err, tasks) {
+            Task.query(Task.getAllTasksOfThisProjectQuery(req.params.projectId),function(err, tasks) {
                 if (err)
                     res.send('DB error', 500);
                 res.json(tasks);
-            })
+            });
         }
     },
     create: function(req, res) {

@@ -16,6 +16,10 @@ angular
                 $scope.logOut = function() {
                     Auth.logOut();
                 }
+
+                $scope.init = function () {
+                    Auth.redirectBackIfNotLoggedIn();
+                }
             },
             AlertController: function($scope, $rootScope) {
                 $rootScope.alert = {type: 'error', message: 'Go to hell!'};
@@ -35,7 +39,9 @@ angular
                     })
                 }
 
-                refreshTeam();
+                $scope.$watch('currentProject', refreshTeam);
+
+                //refreshTeam();
             },
             HomeController: function($scope, $rootScope, User, Task, Parser) {
                 $scope.createTask = function() {
@@ -62,7 +68,7 @@ angular
                     });
                 };
 
-                $rootScope.$watch('currentProject', refreshTasks);
+                $scope.$watch('currentProject', refreshTasks);
             },
             ProjectController: function($scope, Project) {
                 $scope.createProject = function() {
