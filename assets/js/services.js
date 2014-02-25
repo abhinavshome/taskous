@@ -65,7 +65,9 @@ angular
                                 ;
                             },
                             logOut: function() {
-                                return $http.get('/logout');
+                                return $http.get('/logout').success(function() {
+                                    location.href = '/login.html';
+                                });
                             },
                             isLoggedIn: function() {
                                 return currentUser !== null;
@@ -76,8 +78,11 @@ angular
                             getCurrentUser: function() {
                                 return currentUser;
                             },
-                            redirectBackIfNotLoggedIn: function () {
-                                
+                            redirectBackIfNotLoggedIn: function() {
+                                $http.get('/user')
+                                        .error(function(err) {
+                                            location.href = '/login.html';
+                                        })
                             }
                         }
 

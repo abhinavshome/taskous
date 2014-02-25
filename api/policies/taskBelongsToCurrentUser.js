@@ -8,8 +8,6 @@
  *
  */
 module.exports = function(req, res, next) {
-    console.log('2 called', req, req.id);
-
     var taskId = req.params.id,
         projectId = req.params.projectId,
         userId = req.session.user;
@@ -21,7 +19,6 @@ module.exports = function(req, res, next) {
         userId: userId,
         projectId: projectId
     }).done(function(err, teams) {
-        console.log('errors', err, teams);
         if (err) return res.send('DB error', 500);
 
         if (teams.length == 0) return res.send('Not your project', 403);
@@ -31,7 +28,6 @@ module.exports = function(req, res, next) {
             projectId: projectId
         }).done(function(err, tasks) {
             if (err) return res.send('DB error', 500);
-            console.log(tasks);
             if (tasks.length == 0) return res.send('You can\'t access this task', 403);
         })
 

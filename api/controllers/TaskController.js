@@ -8,7 +8,7 @@ module.exports = {
                 res.json(task);
             });
         } else {
-            Task.query(Task.getAllTasksOfThisProjectQuery(req.params.projectId),function(err, tasks) {
+            Task.query(Task.getAllTasksOfThisProjectQuery(req.params.projectId), function(err, tasks) {
                 if (err)
                     res.send('DB error', 500);
                 res.json(tasks);
@@ -16,13 +16,15 @@ module.exports = {
         }
     },
     create: function(req, res) {
-        console.log(req.params);
+        console.log('params-', req.params);
         User.findByUsername(req.body.username, function(err, users) {
             if (err)
                 res.send('DB error', 500);
-            console.log('user', users);
-            if (!users.length)
+            console.log('user->', users);
+            if (!users.length) {
                 res.send('User not found', 404);
+                return;
+            }
 
             Task.create({
                 projectId: req.params.projectId,
@@ -34,7 +36,7 @@ module.exports = {
                     res.send('DB error', 500);
                 console.log('task created', task);
                 res.send(task);
-            })
+            });
         });
     }
 };

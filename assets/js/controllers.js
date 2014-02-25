@@ -3,21 +3,21 @@ angular
         .module("taskous.controllers", [])
         .controller({
             TopMenuController: function($scope, $rootScope, Project, Auth) {
-                
+
                 $scope.projects = Project.query(function() {
                     $rootScope.currentProject = $scope.projects[0];
                 });
-                
+
                 $scope.selectProject = function(project) {
                     $rootScope.currentProject = project;
                     console.log('selected', project);
                 };
-                
+
                 $scope.logOut = function() {
                     Auth.logOut();
                 }
 
-                $scope.init = function () {
+                $scope.init = function() {
                     Auth.redirectBackIfNotLoggedIn();
                 }
             },
@@ -41,7 +41,6 @@ angular
 
                 $scope.$watch('currentProject', refreshTeam);
 
-                //refreshTeam();
             },
             HomeController: function($scope, $rootScope, User, Task, Parser) {
                 $scope.createTask = function() {

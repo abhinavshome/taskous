@@ -9,7 +9,6 @@
  */
 
  module.exports = function(req, res, next) {
-    console.log('add userID called');
     req.body['userId'] = req.session.user;
     return next();
 };

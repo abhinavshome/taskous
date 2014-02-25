@@ -15,8 +15,8 @@
                           class="input-block-level"></textarea>
                 <button class="btn btn-info btn-small pull-right" ng-click="createTask()">Create</button>
             </form>
-            <div ng-repeat="task in tasks"><span class="badge">#{{task.id}}</span> {{task.desc}} 
-            <a ng-click="deleteTask(task)"><i class="icon-trash"></i></a></div>
+            <div ng-repeat="task in tasks" style="background-color: #f7f7f7;padding: 4px;margin: 5px;"><span class="badge">#{{task.id}}</span> {{task.desc}}  @{{task.assignee}}
+                <a ng-click="deleteTask(task)"><i class="icon-trash"></i></a></div>
         </div>
     </div>
     <div class="span4 offset1">
@@ -29,9 +29,9 @@
         </ul>
         <div class="whiteBg p20">
             <div class="project">
-                <h4>{{ currentProject.title }}</h4>
+                <h4>{{ currentProject.title}}</h4>
 
-                <p>{{ currentProject.desc }}</p>
+                <p>{{ currentProject.desc}}</p>
             </div>
             <ul class="nav nav-list">
 
@@ -41,7 +41,7 @@
             <div class="team" ng-controller="TeamController">
                 <h4>Team</h4>
                 <ul>
-                    <li ng-repeat="user in team">{{ user.username }}</li>
+                    <li ng-repeat="user in team">{{ user.username}}</li>
                 </ul>
                 <div class="input-append">
                     <input class="" id="appendedInput" type="text" placeholder="Add user in team" ng-model="newUser.username">

@@ -9,7 +9,6 @@
  */
 
  module.exports = function(req, res, next) {
-    console.log('hasProjectI called', req.params);
     if(req.param('projectId'))
         return next();
     else

@@ -8,16 +8,13 @@
  *
  */
  module.exports = function(req, res, next) {
-    console.log('2 called', req.params.id);
-
+    
     if(req.params.id)
         var userId = req.session.user, projectId = req.params.id;
     else
         return next();
     Team.find({userId: userId, projectId: projectId}).done(function(err, teams){
-        console.log('error2', err, teams);
         if(err){
-            console.log(err);
             return res.send('DB error', 500);
         }
         

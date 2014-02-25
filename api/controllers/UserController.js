@@ -36,7 +36,7 @@ module.exports = {
                     if (match) {
                         // password match
                         req.session.user = user.id;
-                        res.redirect('/app.html')
+                        res.redirect('/');
                     } else {
                         // invalid password
                         if (req.session.user)

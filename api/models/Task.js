@@ -16,7 +16,7 @@ module.exports = {
   },
 
   getAllTasksOfThisProjectQuery: function (projectId) {
-  	return "SELECT task.*,user.username FROM task JOIN user ON task.assigneeId = user.id" + projectId;
+  	return "SELECT task.*,user.username as assignee FROM task JOIN user ON task.assigneeId = user.id where projectId = " + projectId;
   }
 
 };

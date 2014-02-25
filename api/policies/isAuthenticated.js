@@ -16,21 +16,17 @@ module.exports = function(req, res, next) {
   // or if this is the last policy, the controller
     User.findOne(req.session.user).done(function(err, user){
        if(err){
-           console.log(req.session.user);
-           console.log('some error', err);
            req.session.user = null;
            res.send('DB Error', 500);
            return;
        }
        
        if(!user) {
-           console.log('no user');
            req.session.user = null;
            res.send('Wrong user', 403);
            return;
        } 
        
-       console.log('user', user);
        req.currentUser = user;
        next();
     });
