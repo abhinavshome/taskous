@@ -79,31 +79,29 @@
                 </div>
                 <div ng-show="tabs.register">
                    
-                    <form class="form-horizontal" action="/user" method="post">
+                    <form class="form-horizontal" ng-submit="signUp()">
                         <div class="control-group">
                             <label class="control-label" for="inputEmail">Username</label>
                             <div class="controls">
-                                <input type="text" name="email" placeholder="Email">
+                                <input type="text" name="email" placeholder="Email" ng-model="newUser.username">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="inputEmail">Email</label>
                             <div class="controls">
-                                <input type="text" name="email" placeholder="Email">
+                                <input type="text" name="email" placeholder="Email"  ng-model="newUser.email">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="inputPassword">Password</label>
                             <div class="controls">
-                                <input type="password" name="password" placeholder="Password">
+                                <input type="password" name="password" placeholder="Password" ng-model="newUser.password">
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="controls">
-                                <label class="checkbox">
-                                    <input type="checkbox"> Remember me
-                                </label>
-                                <button type="submit" class="btn">Sign in</button>
+                                
+                                <button type="submit" class="btn">Sign up</button>
                             </div>
                         </div>
                     </form>
@@ -120,7 +118,7 @@
         <script type="text/javascript" src="/js/lib/angular-resource.min.js"></script>
 
         <script type="text/javascript">
-                    function MainController($scope) {
+                    function MainController($scope, $http) {
                         $scope.tabs = {
                             login: true,
                             register: false
@@ -135,6 +133,16 @@
                             $scope.tabs.login = false;
                             $scope.tabs.register = true;
                         };
+
+                        $scope.signUp = function () {
+                            $http
+                            .post('/user', $scope.newUser)
+                            .success(function  (user) {
+                                console.log(user, 'redirecting..');
+                                location.href = "/";
+                            });
+                            
+                        }
                     }
         </script>
     </body>
