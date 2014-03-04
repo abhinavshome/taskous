@@ -16,7 +16,7 @@ module.exports.adapters = {
 
   // If you leave the adapter config unspecified 
   // in a model definition, 'default' will be used.
-  'default': 'myLocalMySQLDatabase',
+  'default': 'herokuDB',
 
   // Persistent adapter for DEVELOPMENT ONLY
   // (data is preserved when the server shuts down)
@@ -35,5 +35,9 @@ module.exports.adapters = {
     // so you don't inadvertently push it up if you're using version control
     password: 'beachbody', 
     database: 'taskous_db'
+  },
+
+  herokuDB: {
+      url: "postgres://pmxzitubibzjnb:kXEY59-1WsbYwqYO-uOVD6UwA6@ec2-107-22-163-140.compute-1.amazonaws.com:5432/d6h10qedckh3p1"
   }
 };
