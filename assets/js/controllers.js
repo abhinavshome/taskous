@@ -22,7 +22,10 @@ angular
                 }
             },
             AlertController: function($scope, $rootScope) {
-                $rootScope.alert = {type: 'error', message: 'Go to hell!'};
+                //$rootScope.alert = {type: 'error', message: 'Go to hell!'};
+                $scope.hideAlert = function () {
+                    $rootScope.showAlert = false;
+                }
             },
             TeamController: function($scope, $rootScope, Team) {
 
@@ -42,7 +45,7 @@ angular
                 $scope.$watch('currentProject', refreshTeam);
 
             },
-            HomeController: function($scope, $rootScope, User, Task, Parser) {
+            HomeController: function($scope, $rootScope, User, Task, Parser, Alert) {
                 $scope.createTask = function() {
                     var taskObject = Parser.parse($scope.taskString);
                     Task.save({
@@ -53,6 +56,7 @@ angular
                         $scope.tasks = Task.query({
                             projectId: $rootScope.currentProject.id
                         });
+                        Alert.success('Task created successfully!');
                     });
                 };
                 $scope.deleteTask = function(task) {
@@ -69,9 +73,10 @@ angular
 
                 $scope.$watch('currentProject', refreshTasks);
             },
-            ProjectController: function($scope, Project) {
+            ProjectController: function($scope, Project, Alert) {
                 $scope.createProject = function() {
                     Project.save($scope.project);
+                    Alert.success('Project created successfully!');
                 };
             },
             LoginController: function($scope, $location, $rootScope, Auth) {

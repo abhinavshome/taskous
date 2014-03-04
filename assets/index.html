@@ -35,8 +35,8 @@
 
             <div class="row" ng-controller="AlertController">
                 <div class="span12 h50 pt10">
-                    <div class="alert alert-{{ alert.type }}">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <div class="alert alert-{{ alert.type }}" ng-show="showAlert">
+                        <button type="button" class="close" ng-click="hideAlert()">&times;</button>
                         {{ alert.message }}
                     </div>
                 </div>

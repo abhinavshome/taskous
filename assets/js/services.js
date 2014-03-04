@@ -97,7 +97,26 @@ angular
                                 }
                             }
                         };
+                    },
+                    Alert: function ($rootScope) {
+                        return {
+                            message: function (message) {
+                                $rootScope.showAlert = true;
+                                $rootScope.alert = {
+                                  type: 'message',
+                                  message: message
+                                };
+                            },
+                            success: function (message) {
+                                $rootScope.showAlert = true;
+                                $rootScope.alert = {
+                                  type: 'success',
+                                  message: message
+                                };
+                            }
+                        }
                     }
+                        
 
                 });
 
