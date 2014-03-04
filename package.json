@@ -14,8 +14,7 @@
         "pg": "2.x"
     },
     "scripts": {
-        "start": "forever -w start app.js",
-        "debug": "node debug app.js"
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "main": "app.js",
     "repository": "",
