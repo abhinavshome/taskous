@@ -39,7 +39,7 @@ module.exports.adapters = {
 
   herokuDB: {
       module: 'sails-postgresql',
-      url: "postgres://pmxzitubibzjnb:kXEY59-1WsbYwqYO-uOVD6UwA6@ec2-107-22-163-140.compute-1.amazonaws.com:5432/d6h10qedckh3p1",
+      url: process.env.DATABASE_URL,
       schema: true
   }
 };
