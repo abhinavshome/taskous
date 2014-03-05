@@ -47,6 +47,7 @@ module.exports.adapters = {
         ssl: {
             rejectUnauthorized: false
         }
+    }
 
 //  herokuDB: {
 //      module: 'sails-postgresql',
@@ -59,4 +60,4 @@ module.exports.adapters = {
 ////      password: 'root',
 ////      database: 'taskous_db'
 //  }
-    };
+};
