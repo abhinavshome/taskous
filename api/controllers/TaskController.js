@@ -11,7 +11,7 @@ module.exports = {
             Task.query(Task.getAllTasksOfThisProjectQuery(req.params.projectId), function(err, tasks) {
                 if (err)
                     res.send('DB error', 500);
-                res.json(tasks);
+                res.json(tasks.rows);
             });
         }
     },

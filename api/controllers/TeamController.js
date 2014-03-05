@@ -23,7 +23,7 @@ module.exports = {
             Team
                 .query(Team.getTeamSQLQuery(req.params.projectId), function (err, users) {
                     if (err) res.send('DB error', 500);
-                    res.json(users);
+                    res.json(users.rows);
                 });
         }
     },
