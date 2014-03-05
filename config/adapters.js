@@ -37,27 +37,27 @@ module.exports.adapters = {
         database: 'taskous_db'
     },
 
-    herokuDB: {
-        module: 'sails-postgresql',
-        host: process.env.PG_HOSTNAME || 'localhost',
-        user: process.env.PG_USER || 'root',
-        password: process.env.PG_PASSWORD || '',
-        database: process.env.PG_DATABASE || 'taskous_db',
-        port: process.env.PG_PORT || 5432,
-        ssl: {
-            rejectUnauthorized: false
-        }
-    }
+//    herokuDB: {
+//        module: 'sails-postgresql',
+//        host: process.env.PG_HOSTNAME || 'localhost',
+//        user: process.env.PG_USER || 'root',
+//        password: process.env.PG_PASSWORD || '',
+//        database: process.env.PG_DATABASE || 'taskous_db',
+//        port: process.env.PG_PORT || 5432,
+//        ssl: {
+//            rejectUnauthorized: false
+//        }
+//    }
 
-//  herokuDB: {
-//      module: 'sails-postgresql',
-//      url: process.env.DATABASE_URL,
-////      module: 'sails-mysql',
-////      host: 'localhost',
-////      user: 'postgres',
-//      // Psst.. You can put your password in config/local.js instead
-//      // so you don't inadvertently push it up if you're using version control
-////      password: 'root',
-////      database: 'taskous_db'
-//  }
+  herokuDB: {
+      module: 'sails-postgresql',
+      url: "postgres://pmxzitubibzjnb:kXEY59-1WsbYwqYO-uOVD6UwA6@ec2-107-22-163-140.compute-1.amazonaws.com:5432/d6h10qedckh3p1"//process.env.DATABASE_URL,
+//      module: 'sails-mysql',
+//      host: 'localhost',
+//      user: 'postgres',
+      // Psst.. You can put your password in config/local.js instead
+      // so you don't inadvertently push it up if you're using version control
+//      password: 'root',
+//      database: 'taskous_db'
+  }
 };
