@@ -16,7 +16,7 @@ module.exports.adapters = {
 
     // If you leave the adapter config unspecified
     // in a model definition, 'default' will be used.
-    'default': 'herokuDB',
+    'default': 'localPSQL',
 
     // Persistent adapter for DEVELOPMENT ONLY
     // (data is preserved when the server shuts down)
@@ -37,28 +37,34 @@ module.exports.adapters = {
         database: 'taskous_db'
     },
 
-//    herokuDB: {
-//        module: 'sails-postgresql',
-//        host: process.env.PG_HOSTNAME || 'localhost',
-//        user: process.env.PG_USER || 'root',
-//        password: process.env.PG_PASSWORD || '',
-//        database: process.env.PG_DATABASE || 'taskous_db',
-//        port: process.env.PG_PORT || 5432,
-//        ssl: {
-//            rejectUnauthorized: false
-//        }
-//    }
+    localPSQL: {
+        module: 'sails-postgresql',
+        host: 'localhost',
+        user: 'postgres',
+        password: 'root',
+        database: 'taskous_db',
+        port: 5432
+    },
 
-  herokuDB: {
-      module: 'sails-postgresql',
-      url: "postgres://pmxzitubibzjnb:kXEY59-1WsbYwqYO-uOVD6UwA6@ec2-107-22-163-140.compute-1.amazonaws.com:5432/d6h10qedckh3p1", //process.env.DATABASE_URL,
-      schema: true
-//      module: 'sails-mysql',
-//      host: 'localhost',
-//      user: 'postgres',
-      // Psst.. You can put your password in config/local.js instead
-      // so you don't inadvertently push it up if you're using version control
-//      password: 'root',
-//      database: 'taskous_db'
-  }
+    herokuDB: {
+        module: 'sails-postgresql',
+        host: 'ec2-107-22-163-140.compute-1.amazonaws.com',
+        user: 'pmxzitubibzjnb',
+        password: 'kXEY59-1WsbYwqYO-uOVD6UwA6',
+        database: 'd6h10qedckh3p1',
+        port: 5432
+    }
+
+//  herokuDB1: {
+//      module: 'sails-postgresql',
+//      url: "postgres://pmxzitubibzjnb:kXEY59-1WsbYwqYO-uOVD6UwA6@ec2-107-22-163-140.compute-1.amazonaws.com:5432/d6h10qedckh3p1", //process.env.DATABASE_URL,
+//      schema: true
+////      module: 'sails-mysql',
+////      host: 'localhost',
+////      user: 'postgres',
+//      // Psst.. You can put your password in config/local.js instead
+//      // so you don't inadvertently push it up if you're using version control
+////      password: 'root',
+////      database: 'taskous_db'
+//  }
 };
