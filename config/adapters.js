@@ -40,6 +40,12 @@ module.exports.adapters = {
   herokuDB: {
       module: 'sails-postgresql',
       url: process.env.DATABASE_URL,
-      schema: true
+//      module: 'sails-mysql',
+//      host: 'localhost',
+//      user: 'postgres',
+      // Psst.. You can put your password in config/local.js instead
+      // so you don't inadvertently push it up if you're using version control
+//      password: 'root',
+//      database: 'taskous_db'
   }
 };
