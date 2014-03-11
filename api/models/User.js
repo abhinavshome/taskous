@@ -55,6 +55,6 @@ module.exports = {
     },
 
     getAllProjectsSQLQuery: function (userId) {
-        return 'SELECT project.* FROM project JOIN team ON project.id = team.\"projectId\" where team.\"userId\"=' + userId;
+        return "SELECT 'project'.* FROM 'project' JOIN 'team' ON 'project'.'id' = 'team'.'projectId' where 'team'.'userId'=" + userId;
     }
 }; 

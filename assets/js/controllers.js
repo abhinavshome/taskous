@@ -18,7 +18,7 @@ angular
                 }
 
                 $scope.init = function() {
-                    Auth.redirectBackIfNotLoggedIn();
+
                 }
             },
             AlertController: function($scope, $rootScope) {

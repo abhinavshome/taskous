@@ -22,7 +22,12 @@ module.exports = {
         } else {
             Team
                 .query(Team.getTeamSQLQuery(req.params.projectId), function (err, users) {
-                    if (err) res.send('DB error', 500);
+                    if (err) {
+                        console.log(err);
+                        res.send('DB error', 500);
+                        return;
+                    }
+
                     res.json(users.rows);
                 });
         }

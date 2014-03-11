@@ -47,13 +47,13 @@ angular
                             }
                         };
                     },
-                    Auth: function($http, $rootScope, $location) {
+                    Auth: function($http, $rootScope, $location, Alert) {
                         var currentUser = null;
                         return {
                             logIn: function(user) {
                                 return $http.post('/login', user)
                                         .success(function(user) {
-                                            $rootScope.message = 'User #' + user.username + 'logged in successfully!';
+                                            Alert.success('User #' + user.username + 'logged in successfully!');
                                             currentUser = user;
                                             console.log('redirecting to /');
                                             $location.path('/');
@@ -66,7 +66,8 @@ angular
                             },
                             logOut: function() {
                                 return $http.get('/logout').success(function() {
-                                    location.href = '/login.html';
+                                    currentUser = null;
+                                    $location.path = '/login';
                                 });
                             },
                             isLoggedIn: function() {
@@ -81,7 +82,7 @@ angular
                             redirectBackIfNotLoggedIn: function() {
                                 $http.get('/user')
                                         .error(function(err) {
-                                            location.href = '/login.html';
+                                            //location.href = '/login.html';
                                         })
                             }
                         }

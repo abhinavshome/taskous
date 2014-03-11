@@ -4,15 +4,15 @@
     "version": "0.0.0",
     "description": "a Sails application",
     "dependencies": {
-        "sails": "0.9.8",
+        "sails": "0.9.11",
         "grunt": "0.4.1",
         "sails-disk": "~0.9.0",
         "ejs": "0.8.4",
         "optimist": "0.3.4",
         "bcrypt-nodejs": "",
-        "sails-mysql": "",
+        "sails-mysql": "0.10.x",
         "pg": "2.x",
-        "sails-postgresql":""
+        "sails-postgresql":"0.10.x"
     },
     "scripts": {
         "start": "node app.js",
