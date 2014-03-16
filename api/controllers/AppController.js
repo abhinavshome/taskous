@@ -28,7 +28,9 @@ module.exports = {
     if(!req.session.user)
        return res.redirect('/');
 
-    res.render('/app/index');
+    res.render('/app.html');
+
+
 
     
 
