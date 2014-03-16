@@ -28,6 +28,8 @@ module.exports = {
     if(!req.session.user)
        return res.redirect('/');
 
+    res.render('/app/index');
+
     
 
   },

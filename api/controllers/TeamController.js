@@ -28,7 +28,7 @@ module.exports = {
                         return;
                     }
 
-                    res.json(users.rows);
+                    res.json(users);
                 });
         }
     },

@@ -14,13 +14,20 @@
                 <textarea type="text" placeholder="Create a task" ng-model="taskString"
                           class="input-block-level"></textarea>
                 <button class="btn btn-info btn-small pull-right" ng-click="createTask()">Create</button>
+                <div class="clearfix"></div>
             </form>
-            <div ng-repeat="task in tasks" style="background-color: #f7f7f7;margin: 3px;">
+
+            <div>
+                <a ng-click="clearCompleted()" title="clear completed" class="btn btn-mini"><i class="icon-trash"></i>Clear completed</a></a>
+            </div>
+
+            <div ng-repeat="task in tasks" style="background-color: #f7f7f7;margin: 3px;padding: 3px;">
                 
-                <div class="pull-left" style="background-color: #555; color: #fff; padding: 3px"><strong>#{{task.id}}</strong></div>
+
                 
-                
-                <div class="pull-left ">{{task.desc}}</div>
+                <div class="pull-left"><input type="checkbox" ng-model="task.status" ng-change="markCompleted(task)"
+                                              ng-true-value="completed" ng-false-value="unfinished"></div>
+                <div class="pull-left" style="width: 400px" ng-class="{completed: task.status == 'completed' }"><strong>#{{task.id}}</strong> {{task.desc}}</div>
                 <div class="pull-right" style="font-size: 10px"><i>@{{task.assignee}}</i></div>
                 <div class="pull-left w20" style="display: none;"><a ng-click="deleteTask(task)"><i class="icon-trash"></i></a></div>
                 <div class="clearfix"></div>

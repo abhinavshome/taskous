@@ -28,7 +28,7 @@ module.exports = {
             User.query(User.getAllProjectsSQLQuery(req.session.user), function(err, projects) {
                 if (err)
                     res.send('DB error', 500);
-                res.json(projects.rows);
+                res.json(projects);
             });
         }
     },

@@ -12,11 +12,12 @@ module.exports = {
     reporterId	: 'integer',
     projectId	: 'integer',
     desc: 'string',
-    assigneeId: 'integer'
+    assigneeId: 'integer',
+    status: 'string'
   },
 
   getAllTasksOfThisProjectQuery: function (projectId) {
-  	return "SELECT 'task'.*,'user'.'username' as assignee FROM 'task' JOIN 'user' ON 'task'.'assigneeId' = 'user'.'id' where 'task'.'projectId' = " + projectId;
+  	return "SELECT task.*,user.username as assignee FROM task JOIN user ON task.assigneeId = user.id where task.projectId = " + projectId;
   }
 
 };

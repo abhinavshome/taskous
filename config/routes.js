@@ -37,7 +37,9 @@ module.exports.routes = {
     'get /logout': {controller: 'user', action: 'logout'},
     'get /project/:projectId/task/:id?': {controller: 'task', action: 'find'},
     'post /project/:projectId/task': {controller: 'task', action: 'create'},
+    'put /project/:projectId/task/:id': {controller: 'task', action: 'update'},
     'delete /project/:projectId/task/:id?': {controller: 'task', action: 'destroy'},
+    'delete /project/:projectId/task/:idsToDelete?': {controller: 'task', action: 'destroy'},
     'get /project/:projectId/team': {controller: 'team', action: 'find'},
     'post /project/:projectId/team' : {controller: 'team', action: 'create'}
 

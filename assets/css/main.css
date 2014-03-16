@@ -28,7 +28,9 @@ input, button, select, textarea{
 a{
     cursor: pointer;
 }
-
+.completed{
+    text-decoration: line-through;
+}
 /**** overriding bootstrap defaults *****/
 .nav-tabs>.active>a, .nav-tabs>.active>a:hover, .nav-tabs>.active>a:focus{
     background-color: #065887;

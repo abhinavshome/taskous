@@ -16,7 +16,7 @@ module.exports.adapters = {
 
     // If you leave the adapter config unspecified
     // in a model definition, 'default' will be used.
-    'default': 'localPSQL',
+    'default': 'myLocalMySQLDatabase',
 
     // Persistent adapter for DEVELOPMENT ONLY
     // (data is preserved when the server shuts down)
@@ -33,7 +33,7 @@ module.exports.adapters = {
         user: 'root',
         // Psst.. You can put your password in config/local.js instead
         // so you don't inadvertently push it up if you're using version control
-        password: 'beachbody',
+        password: '',
         database: 'taskous_db'
     },
 
