@@ -70,5 +70,14 @@ module.exports = {
                 req.session.user = user.id;
                 res.send('Signed up successfully!');
             });
+    },
+    find: function(req, res, next){
+        if(req.query.getCurrent)
+            res.json(req.currentUser);
+        else
+            return next();
+    },
+    currentUser: function(req, res) {
+        res.json(req.currentUser);
     }
 };

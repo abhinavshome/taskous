@@ -25,7 +25,8 @@
   	'*': ['isAuthenticated', 'hasProjectId', 'taskBelongsToCurrentUser']
   },
   UserController: {
-      'find': ['isAuthenticated']
+      'find': ['isAuthenticated'],
+      'currentUser': ['isAuthenticated']
   }
   /*
 	// Here's an example of adding some policies to a controller

@@ -1,38 +1,25 @@
 angular
     .module("taskous.controllers", [])
     .controller({
-        MainController: function ($scope, $rootScope, Project, Auth, Alert, Team, $location) {
+        MainController: function ($scope, $rootScope, Project, Auth, User) {
 
             init();
 
             function init() {
-
-                $scope.projects = Project.query(function () {
-                    if ($scope.projects.length)
-                        $rootScope.currentProject = $scope.projects[0];
-                });
+                $scope.user = User.current();
             }
-
-            $scope.selectProject = function (project) {
-                $rootScope.currentProject = project;
-                console.log('selected', project);
-            };
 
             $scope.logOut = function () {
                 Auth.logOut();
-            }
+            };
 
-            $scope.init = function () {
-
-            }
         },
         AlertController: function ($scope, $rootScope) {
-            //$rootScope.alert = {type: 'error', message: 'Go to hell!'};
             $scope.hideAlert = function () {
                 $rootScope.showAlert = false;
             }
         },
-        TeamController: function ($scope, $rootScope, Team) {
+        TeamController: function ($scope, $rootScope, Team, $filter) {
 
             $scope.addUser = function () {
                 Team.save({
@@ -45,23 +32,42 @@ angular
                 if ($rootScope.currentProject) {
                     $scope.team = Team.query({
                         projectId: $rootScope.currentProject.id
+
                     })
                 }
             }
 
+            var refreshOpenTaskCount = function() {
+                for(var i= 0, len= $scope.team.length; i<len; i++){
+                    console.log($filter('filter')($scope.tasks, {assignee: $scope.team[i].username}));
+                    $scope.team[i].openTaskCount = ($filter('filter')($scope.tasks, {assignee: $scope.team[i].username, status: 'open'})).length;
+                }
+            };
+
             $scope.$watch('currentProject', refreshTeam);
+            $scope.$watch('tasks', refreshOpenTaskCount, true);
 
         },
-        HomeController: function ($scope, $rootScope, User, Task, Parser, Alert, $location, $filter) {
+        HomeController: function ($scope, $rootScope, User, Task, Parser, Alert, $location, $filter, Project) {
 
             init();
 
             function init() {
-                if ($scope.projects.length == 0) {
-                    Alert.message('You have no project. Want to create one?');
-                    $location.path('/project/create');
-                }
+                $scope.projects = Project.query(function (projects) {
+                    if (!$scope.projects.length) {
+                        Alert.message('You have no project. Want to create one?');
+                        $location.path('/project/create');
+                    }
+                });
+
+                $scope.taskString = '';
+
             }
+
+            $scope.selectProject = function (project) {
+                $rootScope.currentProject = project;
+                console.log('selected', project);
+            };
 
             $scope.createTask = function () {
                 var taskObject = Parser.parse($scope.taskString);
@@ -70,7 +76,8 @@ angular
                 Task.save({
                     projectId: $rootScope.currentProject.id,
                     desc: taskObject.title,
-                    username: taskObject.assignee
+                    username: taskObject.assignee,
+                    status: 'open'
                 }, function () {
                     $scope.tasks = Task.query({
                         projectId: $rootScope.currentProject.id
@@ -78,6 +85,7 @@ angular
                     Alert.success('Task created successfully!');
                 });
             };
+
             $scope.deleteTask = function (task) {
                 Task.delete({}, {
                     id: task.id,
@@ -85,19 +93,31 @@ angular
                 }, refreshTasks);
             }
 
-            $scope.markCompleted = function(task) {
+            $scope.markCompleted = function (task) {
                 Task.update({}, task);
             }
 
-            $scope.clearCompleted = function(){
+            $scope.clearCompleted = function () {
                 var completedTasks = $filter('filter')($scope.tasks, {status: 'completed'});
                 var idsToDelete = [];
-                for(var i=0; i<completedTasks.length; i++){
+                for (var i = 0; i < completedTasks.length; i++) {
                     idsToDelete.push(completedTasks[i].id);
                 }
-                Task.clearDone(idsToDelete).success(function(){
+                Task.clearDone(idsToDelete).success(function () {
                     refreshTasks();
                 })
+            }
+
+            $scope.setCurrentProjectAsDefault = function() {
+                $scope.user.defaultProjectId = $scope.currentProject.id;
+                //console.log($scope.user);
+                //User.update({}, $scope.user);
+                $scope.user.$update();
+            }
+
+            var setDefaultProjectAsCurrent = function() {
+                console.log('setDefaultProjectAsCurrent called');
+                $rootScope.currentProject = Project.get({}, {id:$scope.user.defaultProjectId});
             }
 
             var refreshTasks = function () {
@@ -109,6 +129,13 @@ angular
             };
 
             $scope.$watch('currentProject', refreshTasks);
+
+            $scope.$watch('user', setDefaultProjectAsCurrent);
+
+            $scope.$watch('taskString', function(){
+                var thisChar = $scope.taskString.charAt($scope.taskString.length - 1);
+                console.log(thisChar);
+            })
         },
         ProjectController: function ($scope, Project, Alert, $location) {
             $scope.createProject = function () {

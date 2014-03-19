@@ -14,7 +14,12 @@ module.exports = {
     },
 
     getTeamSQLQuery: function (projectId) {
-        return 'SELECT user.username, user.id FROM user JOIN team ON user.id = team.userId where team.projectId=' + projectId;
+        return 'select user.username, count(task.id) as openTaskCount ' +
+            'from user join team on user.id = team.userId ' +
+            'left join task on user.id = task.assigneeId ' +
+            'where team.projectId = ' + projectId + ' ' +
+            'and (task.status = \'open\' or task.status is null)' +
+            'group by user.id'
     }
 
 };

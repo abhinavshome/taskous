@@ -46,6 +46,16 @@ angular
                 }, {}
             );
         },
+        User: function ($resource) {
+            return $resource(
+                "/user/:id", {
+                    id: '@id'
+                }, {
+                    'update': {method: 'PUT'},
+                    'current': {method: 'GET', params: {getCurrent: true}}
+                }
+            );
+        },
         AppData: function () {
             var data = {};
             return {
@@ -92,7 +102,7 @@ angular
                 redirectBackIfNotLoggedIn: function () {
                     $http.get('/user')
                         .error(function (err) {
-                            //location.href = '/login.html';
+                            location.href = '/';
                         })
                 }
             }

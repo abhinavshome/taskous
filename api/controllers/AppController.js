@@ -2,7 +2,7 @@
  * AppController
  *
  * @module      :: Controller
- * @description	:: A set of functions called `actions`.
+ * @description    :: A set of functions called `actions`.
  *
  *                 Actions contain code telling Sails how to respond to a certain type of request.
  *                 (i.e. do stuff, then send some JSON, show an HTML page, or redirect to another URL)
@@ -16,34 +16,25 @@
  */
 
 module.exports = {
-    
-  
-  /**
-   * Action blueprints:
-   *    `/app/index`
-   *    `/app`
-   */
-   index: function (req, res) {
-    
-    if(!req.session.user)
-       return res.redirect('/');
-
-    res.render('/app.html');
 
 
+    /**
+     * Action blueprints:
+     *    `/app/index`
+     *    `/app`
+     */
+    index: function (req, res) {
+        if (!req.session.user)
+            return res.redirect('/');
+        res.view();
+    },
 
-    
 
-  },
+    /**
+     * Overrides for the settings in `config/controllers.js`
+     * (specific to AppController)
+     */
+    _config: {}
 
 
-
-
-  /**
-   * Overrides for the settings in `config/controllers.js`
-   * (specific to AppController)
-   */
-  _config: {}
-
-  
 };

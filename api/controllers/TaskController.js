@@ -21,7 +21,8 @@ module.exports = {
                 projectId: req.params.projectId,
                 reporterId: req.session.user,
                 desc: req.body.desc,
-                assigneeId: req.session.user
+                assigneeId: req.session.user,
+                status: 'open'
             }).done(function (err, task) {
                     if (err)
                         res.send('DB error', 500);
@@ -42,7 +43,8 @@ module.exports = {
                     projectId: req.params.projectId,
                     reporterId: req.session.user,
                     desc: req.body.desc,
-                    assigneeId: users[0].id
+                    assigneeId: users[0].id,
+                    status: 'open'
                 }).done(function (err, task) {
                         if (err)
                             res.send('DB error', 500);

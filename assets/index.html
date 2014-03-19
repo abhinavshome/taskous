@@ -49,14 +49,14 @@
                     <label class="control-label" for="inputEmail">Email</label>
 
                     <div class="controls">
-                        <input type="text" name="email" placeholder="Email" ng-model="logInUser.email" required>
+                        <input type="text" name="email" id="loginEmail" placeholder="Email" ng-model="logInUser.email" required>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="inputPassword">Password</label>
 
                     <div class="controls">
-                        <input type="password" name="password" placeholder="Password" ng-model="logInUser.password"
+                        <input type="password" name="password" id="loginPassword" placeholder="Password" ng-model="logInUser.password"
                                required>
                     </div>
                 </div>
@@ -117,7 +117,6 @@
             register: false
         };
 
-        $scope.logInUser = {};
 
         $scope.showLoginTab = function () {
             $scope.tabs.login = true;
@@ -144,10 +143,18 @@
         };
 
         $scope.signIn = function () {
+
+            //logInUser manually inserted into scope as on auto-fill
+            //by browser, $scope is not updated
+            $scope.logInUser = {
+                email: $("#loginEmail").val(),
+                password: $("#loginPassword").val()
+            };
+
             $http
                     .post('/login', $scope.logInUser)
                     .success(function (message) {
-                        location.href = "/app.html";
+                        location.href = "/app";
                     })
                     .error(function (err) {
                         $scope.alert = {

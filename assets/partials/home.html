@@ -18,18 +18,21 @@
             </form>
 
             <div>
-                <a ng-click="clearCompleted()" title="clear completed" class="btn btn-mini"><i class="icon-trash"></i>Clear completed</a></a>
+                <a ng-click="clearCompleted()" title="clear completed" class="btn btn-mini"><i class="icon-trash"></i>Clear
+                    completed</a></a>
             </div>
 
             <div ng-repeat="task in tasks" style="background-color: #f7f7f7;margin: 3px;padding: 3px;">
-                
 
-                
+
                 <div class="pull-left"><input type="checkbox" ng-model="task.status" ng-change="markCompleted(task)"
-                                              ng-true-value="completed" ng-false-value="unfinished"></div>
-                <div class="pull-left" style="width: 400px" ng-class="{completed: task.status == 'completed' }"><strong>#{{task.id}}</strong> {{task.desc}}</div>
+                                              ng-true-value="completed" ng-false-value="open"></div>
+                <div class="pull-left" style="width: 400px" ng-class="{completed: task.status == 'completed' }"><strong>#{{task.id}}</strong>
+                    {{task.desc}}
+                </div>
                 <div class="pull-right" style="font-size: 10px"><i>@{{task.assignee}}</i></div>
-                <div class="pull-left w20" style="display: none;"><a ng-click="deleteTask(task)"><i class="icon-trash"></i></a></div>
+                <div class="pull-left w20" style="display: none;"><a ng-click="deleteTask(task)"><i
+                        class="icon-trash"></i></a></div>
                 <div class="clearfix"></div>
             </div>
         </div>
@@ -44,7 +47,20 @@
         </ul>
         <div class="whiteBg p20">
             <div class="project">
-                <h4>{{ currentProject.title}}</h4>
+                <h4>{{ currentProject.title}}
+                    <span class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <b class="caret"></b>
+                        </a>
+                        <a ng-click="setCurrentProjectAsDefault()" ng-show="user.defaultProjectId != currentProject.id">set default</a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="project in projects"><a tabindex="-1" ng-click="selectProject(project)">{{project.title}}</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a tabindex="-1" href="#">Create New</a></li>
+                        </ul>
+                    </span>
+                </h4>
 
                 <p>{{ currentProject.desc}}</p>
             </div>
@@ -56,10 +72,11 @@
             <div class="team" ng-controller="TeamController">
                 <h4>Team</h4>
                 <ul>
-                    <li ng-repeat="user in team">{{ user.username}}</li>
+                    <li ng-repeat="user in team">{{ user.username }} ({{ user.openTaskCount }})</li>
                 </ul>
                 <div class="input-append">
-                    <input class="" id="appendedInput" type="text" placeholder="Add user in team" ng-model="newUser.username">
+                    <input class="" id="appendedInput" type="text" placeholder="Add user in team"
+                           ng-model="newUser.username">
                     <span class="add-on"><a ng-click="addUser()"><i class="icon-plus"></i></a></span>
 
                 </div>

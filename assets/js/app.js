@@ -27,6 +27,55 @@ angular.module("taskous", ['taskous.services', 'taskous.controllers', 'ngRoute']
             .otherwise({
                 redirectTo: '/'
             });
-    }]);
+    }])
+    .config(function ($provide, $httpProvider, $compileProvider) {
+        var elementsList = $();
+
+
+        $httpProvider.responseInterceptors.push(function ($timeout, $q, $rootScope) {
+                return function (promise) {
+                    return promise.then(function (successResponse) {
+                            return successResponse;
+
+                        }, function (errorResponse) {
+                            var showMessage = function (content) {
+                                $rootScope.showAlert = true;
+                                $rootScope.alert = {
+                                    type: 'error',
+                                    message: content
+                                };
+                            };
+                            switch (errorResponse.status) {
+                                case 401:
+                                    showMessage('Wrong usename or password');
+                                    break;
+                                case 403:
+                                    showMessage('You don\'t have the right to do this');
+                                    break;
+                                case 500:
+                                    showMessage('Server internal error: ' + errorResponse.data);
+                                    break;
+                                default:
+                                    showMessage('Error ' + errorResponse.status + ': ' + errorResponse.data);
+                            }
+                            return $q.reject(errorResponse);
+                        }
+                    )
+                        ;
+                };
+            }
+        )
+        ;
+
+        $compileProvider.directive('appMessages', function () {
+            var directiveDefinitionObject = {
+                link: function (scope, element, attrs) {
+                    elementsList.push($(element));
+                }
+            };
+            return directiveDefinitionObject;
+        });
+    })
+;
 
 
